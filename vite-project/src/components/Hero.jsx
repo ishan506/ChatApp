@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import ChatPreview from "./ChatPreview";
  import Photo from "./N";
+ import { Link } from "react-router-dom";
 function Hero() {
   return (
     <section className="  flex flex-col md:flex-row   justify-between px-8 py-16 gap-10">
@@ -50,7 +51,7 @@ function Hero() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Get Started
+                <Link to="/about"> Get Started </Link>
             </motion.span>
           </div>
 

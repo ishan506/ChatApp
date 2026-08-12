@@ -55,7 +55,7 @@ export default function Footer() {
 </div>
   <div className="flex items-center gap-3">
       <div className="bg-violet-900/30 p-2 rounded-lg text-violet-400">  <ShieldCheck /></div>
-      hii</div>
+      Chat Lock</div>
               <Feature icon={<Zap />} text="Real-time Messaging" />
 
               <Feature icon={<Globe />} text="Connect Worldwide" />
