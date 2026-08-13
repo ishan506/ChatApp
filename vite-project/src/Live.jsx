@@ -1,7 +1,8 @@
  import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import Ham from "./Hamburger";
+import Emoj from "./emoj"
 import HeaderChat from "./HeaderChats";
+import Timeshow from "./time";
 const socket = io("http://localhost:5000");
 
 function Apps() {
@@ -51,37 +52,51 @@ function Apps() {
 
     return (
         
-        <div className="text-black bg-white p-5">
-            <h1>My Chat</h1>
- {/* hammburg */}
-<Ham/>
-<HeaderChat/>
+         
+  <div className="min-h-screen flex flex-col text-black bg-linear-to-b from-[#FFF8F3] via-[#FFF5FA] to-[#F3E8FF] p-5 ">
 
-            
+    {/* Title */}
+    <h1>My Chat</h1>
 
-            {/* Messages */}
-            <div>
-                {messages.map((msg, index) => (
-                    <p key={index}>
-                        {msg}
-                    </p>
-                ))}
-            </div>
+   
 
-            {/* Input */}
-            <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write message..."
-            />
+    {/* Chat Header */}
+    <HeaderChat />
 
-            <button onClick={sendMessage}>
-                Send
-            </button>
+    {/* Messages */}
+    <div className="flex-1 overflow-y-auto">
+      {messages.map((msg, index) => (
+        <p  className="bg-[#F8FAFF] text-[#3B82F6]  w-fit h-fit"key={index}>
+          {msg}
+          
+        </p>
+       
+      ))}
+       <p>{Timeshow}</p>
+    </div>
 
-        </div>
-    );
+    {/* Input + Send */}
+    <div className="flex items-center gap-2 w-full">
+      <Emoj setMessage={setMessage} />
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Write message..."
+        className="flex-1 border rounded px-3 py-3"
+      />
+
+      <button
+        onClick={sendMessage}
+        className="bg-purple-400 text-white px-4 py-3 rounded-full"
+      >
+        Send
+      </button>
+    </div>
+
+  </div>
+);
+    
 }
 
 export default Apps;
