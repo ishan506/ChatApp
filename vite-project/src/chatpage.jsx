@@ -19,6 +19,15 @@ function Chatpage(){
     setChange("");
 
 }
+const [lastSeen, setLastSeen] = useState(null);
+
+useEffect(() => {
+  socket.on("lastSeen", (data) => {
+    setLastSeen(data.time);
+  });
+
+  return () => socket.off("lastSeen");
+}, []);
 const handleof=()=>setOnline(false)
 const handleon=()=>setOnline(true)
 
@@ -76,7 +85,16 @@ setC(index);
 <button onClick={click}><IoSend /></button>
  {/* <button onClick={()=>{update(i)}}> update</button>
 <button onClick={()=>{remove(i)}}> remove</button>  */}
-<h1>{online ? "ONLINE" : "OFFLINE"}</h1>
+
+
+const [lastSeen, setLastSeen] = useState(null);
+
+ 
+
+<h1>{online ? "ONLINE" :   `last seen ${new Date(lastSeen).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`}</h1>
 </div>
 </div>
         </>

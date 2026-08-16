@@ -1,4 +1,4 @@
- import { ChevronLeft, UserRound ,Phone ,Video ,  
+  import { ChevronLeft, UserRound ,Phone ,Video ,  
      } from "lucide-react";
 import {useState,useEffect} from "react";
 import Ham from "./Hamburger";
@@ -20,6 +20,15 @@ function HeaderChat() {
       setImage(URL.createObjectURL(file));
     }
   };
+
+ const [lastSeen, setLastSeen] = useState(null);
+
+useEffect(() => {
+  socket.on("lastSeen", (data) => {
+    setLastSeen(data.time);
+  });
+return () => socket.off("lastSeen");
+}, []);
 //delete
  const [showOptions, setShowOptions] = useState(false);
 
@@ -41,11 +50,11 @@ const handleDeleteImage = () => {
     };
   }, []);
  
- 
+
   
   return (
     <>
-      <div className="flex items-center gap-2">
+      <div className=" flex  items-center gap-2">
 
     
     <Ham />
@@ -146,7 +155,10 @@ const handleDeleteImage = () => {
     ></span>
 
     <span className="text-xs text-gray-500">
-      {online ? "Online" : "Offline"}
+      {online ? "Online" : `last seen ${new Date(lastSeen).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`}
     </span>
   </div>
 </div>
