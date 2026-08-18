@@ -1,5 +1,6 @@
   import { ChevronLeft, UserRound ,Phone ,Video ,  
      } from "lucide-react";
+     import socket from "./socket";
 import {useState,useEffect} from "react";
 import Ham from "./Hamburger";
 import { useNavigate } from "react-router-dom";
@@ -141,7 +142,7 @@ const handleDeleteImage = () => {
  </div>
 <div className="flex justify-end ml-auto   gap-3 ">
 <span className="bg-purple-400 rounded-4xl  p-1 " ><Phone />  </span>
-<button  className="bg-purple-400 rounded-4xl p-1 cursor-pointer "onClick={() => navigate("/video?roomID=abc123")}>
+<button  className="bg-purple-400 rounded-4xl p-1 cursor-pointer ">
   <Video />
 </button>
   
@@ -159,7 +160,11 @@ const handleDeleteImage = () => {
         hour: "2-digit",
         minute: "2-digit",
       })}`}
+
     </span>
+
+
+
   </div>
 </div>
 

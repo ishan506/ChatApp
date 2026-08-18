@@ -1,10 +1,8 @@
  import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import socket from "./socket";
 import Emoj from "./emoj";
 import HeaderChat from "./HeaderChats";
 import Timeshow from "./time";
-
-const socket = io("http://localhost:5000");
 
 function Apps() {
   const [message, setMessage] = useState("");
@@ -41,10 +39,18 @@ function Apps() {
         hour: "2-digit",
         minute: "2-digit",
       }),
+      status: "sent",
     };
 
     console.log("Sending:", newMessage);
 
+    
+    setMessages((oldMessages) => [
+      ...oldMessages,
+      newMessage
+    ]);
+
+     
     socket.emit("send-message", newMessage);
 
     setMessage("");
@@ -65,6 +71,18 @@ function Apps() {
             key={index}
           >
             <p>{msg.text}</p>
+
+            <span>
+              {msg.status === "sent" && "✓"}
+
+              {msg.status === "delivered" && "✓✓"}
+
+              {msg.status === "read" && (
+                <span className="text-blue-500">
+                  ✓✓
+                </span>
+              )}
+            </span>
 
             <Timeshow time={msg.time} />
           </div>
