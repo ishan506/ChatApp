@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ChatPreview from "./ChatPreview";
+ 
  import Photo from "./N";
  import { Link } from "react-router-dom";
 function Hero() {

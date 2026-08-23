@@ -19,15 +19,22 @@ function Emoj({ setMessage }) {
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener(
+      "mousedown",
+      handleOutsideClick
+    );
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener(
+        "mousedown",
+        handleOutsideClick
+      );
     };
   }, []);
 
   return (
     <div ref={emojiRef} className="relative">
+
       <button
         onClick={() => setShowEmoji((prev) => !prev)}
         className="text-2xl"
@@ -37,9 +44,12 @@ function Emoj({ setMessage }) {
 
       {showEmoji && (
         <div className="absolute bottom-16 left-0 z-50">
-          <EmojiPicker onEmojiClick={handleEmojiClick} />
+          <EmojiPicker
+            onEmojiClick={handleEmojiClick}
+          />
         </div>
       )}
+
     </div>
   );
 }
